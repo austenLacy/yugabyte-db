@@ -64,12 +64,12 @@ func (h *HelperContainer) GetMastersFuture(future chan MastersFuture) {
 	// Note: we don't use the BuildMasterURLs helper here, because it might call this function
 	// and cause infinite recursion
 	mastersListFuture := make(chan MastersListFuture)
-	go h.GetMastersFromTserverFuture(MasterHost, mastersListFuture)
+	go h.GetMastersFromTserverFuture(TserverHost, mastersListFuture)
 	mastersListResponse := <-mastersListFuture
 	masterAddresses := []string{}
 	if mastersListResponse.Error != nil {
 		h.logger.Warnf("failed to get masters list from tserver at %s: %s",
-			MasterHost, mastersListResponse.Error.Error())
+			TserverHost, mastersListResponse.Error.Error())
 		// In this case, assume current node is a master
 		masterAddresses = append(masterAddresses, MasterHost)
 	} else {
