@@ -1617,7 +1617,7 @@ func (c *Container) GetTableInfo(ctx echo.Context) error {
 		TableType:          tableInfo.TableInfo.TableType,
 		TableState:         tableInfo.TableInfo.TableState,
 		TableStateMessage:  tableInfo.TableInfo.TableStateMessage,
-		TableTablespaceOid: tableInfo.TableInfo.TableTablespaceOid,
+		TableTablespaceOid: strconv.Itoa(int(tableInfo.TableInfo.TableTablespaceOid)),
 		TableReplicationInfo: models.TableInfoTableReplicationInfo{
 			LiveReplicas: models.TableReplicationInfo{
 				NumReplicas:     int32(tableInfo.TableInfo.TableReplicationInfo.LiveReplicas.NumReplicas),
